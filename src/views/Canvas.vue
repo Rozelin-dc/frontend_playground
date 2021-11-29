@@ -6,7 +6,6 @@
       @mousedown="dragStart"
       @mouseup="dragEnd"
       @mouseout="dragEnd"
-      @mousemove="draw"
     />
   </div>
 </template>
@@ -24,6 +23,7 @@ export default class extends Vue {
   beginY = 0
   endX = 0
   endY = 0
+  isDrag = false
 
   mounted() {
     this.canvas = <HTMLCanvasElement>document.getElementById('canvas')
@@ -47,11 +47,12 @@ export default class extends Vue {
   dragStart(e) {
     this.beginX = e.layerX
     this.beginY = e.layerY
+    this.isDrag = true
   }
 
   // 描画終了（mouseup, mouseout）
   dragEnd(e) {
-    if (!this.ctx) {
+    if (!this.ctx || !this.isDrag) {
       return
     }
 
@@ -64,6 +65,7 @@ export default class extends Vue {
       this.endX - this.beginX,
       this.endY - this.beginY
     )
+    this.isDrag = false
   }
 }
 </script>
