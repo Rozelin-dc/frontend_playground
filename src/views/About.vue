@@ -6,27 +6,27 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import Two from "twojs-ts";
+import { Options, Vue } from 'vue-class-component'
+import Two from 'twojs-ts'
 
 @Options({
-  name: "About",
+  name: 'About',
 })
 export default class Home extends Vue {
-  element: HTMLElement | null = null;
-  two: Two | null = null;
-  circle: Two.Circle | null = null;
+  element: HTMLElement | null = null
+  two: Two | null = null
+  circle: Two.Circle | null = null
 
-  mounted(): void {
-    this.element = document.getElementById("#playground");
+  mounted() {
+    this.element = document.getElementById('#playground')
 
     if (!this.element) {
-      return;
+      return
     }
 
-    this.two = new Two().appendTo(this.element);
-    this.circle = this.two.makeCircle(0, 0, 50);
-    this.circle.fill = "#FF8000";
+    this.two = new Two().appendTo(this.element)
+    this.circle = this.two.makeCircle(0, 0, 50)
+    this.circle.fill = '#FF8000'
   }
 }
 </script>
