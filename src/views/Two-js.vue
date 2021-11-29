@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Two.js</h1>
-    <svg id="playground" />
+    <div id="playground" />
   </div>
 </template>
 
@@ -17,7 +17,7 @@ export default class extends Vue {
   two: Two | null = null
   circle: Two.Circle | null = null
 
-  mounted() {
+  async mounted() {
     this.element = document.getElementById('playground')
 
     if (!this.element) {
@@ -25,9 +25,12 @@ export default class extends Vue {
     }
 
     this.two = new Two().appendTo(this.element)
-    this.circle = this.two.makeCircle(0, 0, 50)
-    // this.circle.fill = '#FF8000'
-    this.two.update()
+    try {
+      this.circle = await this.two.makeCircle(110, 110, 50)
+      await (this.circle.fill = '#FF8039')
+    } finally {
+      this.two.update()
+    }
   }
 }
 </script>
